@@ -5,9 +5,8 @@ const port = 8000;
 const app = express();
 
 
-// using express routers
+// using central express router
 app.use('/', require('./routes/index'));
-
 
 
 
