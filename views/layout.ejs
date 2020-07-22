@@ -3,14 +3,23 @@
         <title>
             <%= title %>
         </title>
+        <link rel="stylesheet" href="/css/layout.css">
+
+        <!-- used to add sub page styles (e.g., of user_profile.ejs) in head section -->
+        <%- style %>
     </head>
     <body>
 
+        <!-- used to include header partial -->
         <%- include('_header'); %>
 
+        <!-- used to put html (or ejs) of templates -->
         <%- body %>
 
         <%- include('_footer'); %>
+
+        <!-- used to include footer partial -->
+        <%- script %>
 
     </body>
 </html>

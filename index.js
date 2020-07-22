@@ -4,6 +4,19 @@ const expressLayouts = require('express-ejs-layouts');
 const port = 8000;
 const app = express();
 
+app.use(express.static('./assets'));
+
+// extracting styles and scripts from css or jss ofsub pages,
+// to the layout (with the layout.css linking line in .ejs templates)
+
+// for css(styles)
+app.set('layout extractStyles', true);
+
+// for js(scripts)
+app.set('layout extractScripts', true);
+
+
+
 app.use(expressLayouts);
 
 
