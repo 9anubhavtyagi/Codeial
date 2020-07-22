@@ -10,6 +10,7 @@ const router = express.Router();
 
 
 
+
 // our central router serves responses for '/' kind of requests.
 // these responses are written in 'home_controller' in controllers directory.
 // that's why we used it
@@ -17,16 +18,18 @@ const homeController = require('../controllers/home_controller');
 
 
 // serving response for '/' with the help of home_controller.
-// router.get('/', homeController.home);
-
 router.get('/', homeController.home);
+
+
+// router.get('/', homeController.home);
 
 
 // indicating to use 'users.js' router when,
 // request (related to users) are come.
 router.use('/users', require('./users'));
 
-router.use('/posts', require('./posts'));
+
+// router.use('/posts', require('./posts'));
 
 
 // exporting the central router

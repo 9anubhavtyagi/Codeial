@@ -9,6 +9,13 @@ const app = express();
 app.use('/', require('./routes/index'));
 
 
+// set-up view engine
+app.set('view engine', 'ejs');
+
+// indicating where are views (ejs templates) present.
+app.set('views', './views');
+
+
 
 
 
