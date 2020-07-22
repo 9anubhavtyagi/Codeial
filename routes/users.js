@@ -17,5 +17,14 @@ router.get('/profile', userController.profile);
 
 // router.get('/profile2', userController.profile2);
 
+
+
+// serving response for '/users/sign-up' with the help of users_controller.
+router.get('/sign-up', userController.signUp);
+
+// serving response for '/users/sign-up' with the help of users_controller.
+router.get('/sign-in', userController.signIn);
+
+
 // exporting this router, so that central-router can use it.
 module.exports = router;
