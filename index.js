@@ -1,13 +1,17 @@
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 
+// requiring db from mongoose.js of config directory.
+const db = require('./config/mongoose');
+
 const port = 8000;
 const app = express();
 
 app.use(express.static('./assets'));
 
-// extracting styles and scripts from css or jss ofsub pages,
-// to the layout (with the layout.css linking line in .ejs templates)
+
+// extracting styles and scripts from css or jss ofsub pages, and put them
+// to the layout (with the layout.css linking line in 'layout.ejs' layout)
 
 // for css(styles)
 app.set('layout extractStyles', true);
