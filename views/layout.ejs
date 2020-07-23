@@ -4,6 +4,8 @@
             <%= title %>
         </title>
         <link rel="stylesheet" href="/css/layout.css">
+        <link rel="stylesheet" href="/css/header.css">
+        <link rel="stylesheet" href="/css/footer.css">
 
         <!-- used to add sub page styles (e.g., of user_profile.ejs) in head section -->
         <%- style %>
@@ -13,8 +15,10 @@
         <!-- used to include header partial -->
         <%- include('_header'); %>
 
-        <!-- used to put html (or ejs) of templates -->
-        <%- body %>
+        <main id="layout-main">
+            <!-- used to put html (or ejs) of page templates -->
+            <%- body %>
+        </main>
 
         <%- include('_footer'); %>
 
