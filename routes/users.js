@@ -14,7 +14,7 @@ const userController = require('../controllers/users_controller');
 
 
 // serving response for '/users/profile' with the help of users_controller.
-router.get('/profile', userController.profile);
+router.get('/profile', passport.checkAuthentication, userController.profile);
 
 // router.get('/profile2', userController.profile2);
 

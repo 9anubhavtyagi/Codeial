@@ -50,7 +50,17 @@ app.use(session({
     
     // TO-DO LATER before deployment in production mode.
     secret: 'blahsomething',
+
+    // whenever there is a request(session) which is not initialized,
+    // means user is not logged in,
+    // then there is no need to store extra information in the cookie
+    // that's why we set 'saveUninitialized' to false,
     saveUninitialized: false,
+
+
+    // when the identity is established or some sort of session data is
+    // present in the cookie, then there is no need to override it,
+    // until it changes. 
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100) // 100 minutes.
@@ -61,6 +71,8 @@ app.use(session({
 app.use(passport.initialize());
 
 app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser);
 
 
 // using central express router
