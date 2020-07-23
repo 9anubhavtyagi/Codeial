@@ -1,4 +1,9 @@
 
+// importing or requiring Schema
+const User = require('../models/users');
+
+
+
 // first basic response for '/users/profile' request.
 module.exports.profile = function(req, res){
     // res.end('<h1> User Profile </h1>');
@@ -30,7 +35,37 @@ module.exports.signIn = function(req, res){
 
 // get the sign up data
 module.exports.create = function(req, res){
-    // TO DO Later
+
+    // password and confirm_passwrord don't match
+    if(req.body.password != req.body.confirm_password){
+        console.log("Password and confirm password not match");
+        return res.redirect('back');
+    }
+
+    User.findOne({email: req.body.email}, function(err, user){
+        if(err){
+            console.log('Error in finding user during sign-up');
+            return;
+        }
+
+        // if user first time creating its account
+        if(!user){
+            User.create(req.body, function(err, user){
+                if(err){
+                    console.log('Error in finding user during sign-up');
+                    return;
+                }
+                console.log("User account is created")
+                return res.redirect('/users/sign-in');
+            });
+        }
+
+        // if user already had an account
+        else{
+            console.log("User already had an account")
+            return res.redirect('back');
+        }
+    });
 };
 
 

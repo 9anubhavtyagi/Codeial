@@ -26,5 +26,8 @@ router.get('/sign-up', userController.signUp);
 router.get('/sign-in', userController.signIn);
 
 
+// posting the data to server and creating users with the help of user_controller.
+router.post('/create', userController.create);
+
 // exporting this router, so that central-router can use it.
 module.exports = router;
