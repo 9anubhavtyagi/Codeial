@@ -4,6 +4,7 @@
 const express = require('express');
 
 const router = express.Router();
+const passport = require('passport');
 
 
 // this router serves all responses for '/users/' kind of requests.
@@ -28,6 +29,12 @@ router.get('/sign-in', userController.signIn);
 
 // posting the data to server and creating users with the help of user_controller.
 router.post('/create', userController.create);
+
+// use passport as a middleware to authenticate
+router.post('/create-session', passport.authenticate(
+    'local',
+    {failureRedirect: '/users/sign-in'},
+), userController.createSession);
 
 // exporting this router, so that central-router can use it.
 module.exports = router;
