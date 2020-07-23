@@ -36,5 +36,8 @@ router.post('/create-session', passport.authenticate(
     {failureRedirect: '/users/sign-in'},
 ), userController.createSession);
 
+
+router.get('/sign-out', userController.destroySession);
+
 // exporting this router, so that central-router can use it.
 module.exports = router;

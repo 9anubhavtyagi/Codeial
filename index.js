@@ -13,6 +13,9 @@ const passport = require('passport');
 // importing our Strategy
 const passportLocal = require('./config/passport-local-strategy');
 
+// importing mongo-store
+const MongoStore = require('connect-mongo')(session);
+
 const port = 8000;
 const app = express();
 
@@ -64,7 +67,16 @@ app.use(session({
     resave: false,
     cookie: {
         maxAge: (1000 * 60 * 100) // 100 minutes.
-    }
+    },
+
+    // mongo store is used to store the session cookie in the DB
+    store: new MongoStore({
+        mongooseConnection: db,
+        autoRemove: 'disabled'
+    },
+    function(err){
+        console.log(err || 'connect-mongodb setup ok ');
+    })
 }));
 
 // initialize passport
