@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const expressLayouts = require('express-ejs-layouts');
 
 // requiring db from mongoose.js of config directory.
@@ -6,6 +7,11 @@ const db = require('./config/mongoose');
 
 const port = 8000;
 const app = express();
+
+app.use(express.urlencoded());
+
+// using cookieParser
+app.use(cookieParser());
 
 app.use(express.static('./assets'));
 
