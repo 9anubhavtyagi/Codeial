@@ -1,12 +1,11 @@
 
-// following is just an exammple of post router
-// const express = require('express');
+const express = require('express');
 
-// const router = express.Router();
+const router = express.Router();
 
-// const postsController = require('../controllers/posts_controller');
+const postsController = require('../controllers/posts_controller');
 
-// router.get('/', postsController.usersPost);
+router.post('/create', postsController.create);
 
 
-// module.exports = router;
+module.exports = router;

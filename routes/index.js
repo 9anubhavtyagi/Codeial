@@ -25,11 +25,13 @@ router.get('/', homeController.home);
 
 
 // indicating to use 'users.js' router when,
-// request (related to users) are come.
+// requests (related to users) will come.
 router.use('/users', require('./users'));
 
 
-// router.use('/posts', require('./posts'));
+// indicating to use 'posts.js' router when,
+// requests (related to posts) will come.
+router.use('/posts', require('./posts'));
 
 
 // exporting the central router
