@@ -34,5 +34,9 @@ router.use('/users', require('./users'));
 router.use('/posts', require('./posts'));
 
 
+// indicating to use 'commentss.js' router when,
+// requests (related to comments) will come.
+router.use('/comments', require('./comments'));
+
 // exporting the central router
 module.exports = router;
