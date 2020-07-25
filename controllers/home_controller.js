@@ -16,6 +16,7 @@
 
 
 const Post = require('../models/post');
+const User = require('../models/users');
 
 
 module.exports.home = function(req, res){
@@ -39,10 +40,14 @@ module.exports.home = function(req, res){
         }
     })
     .exec(function(err, posts){
-        return res.render('home',{
-            title: "Codeial | Home",
-            heading: "Codeial Home Wall",
-            posts: posts
+
+        User.find({}, function(err, users){
+            return res.render('home',{
+                title: "Codeial | Home",
+                heading: "Codeial Home Wall",
+                posts: posts,
+                all_users: users
+            });
         });
     });
 }

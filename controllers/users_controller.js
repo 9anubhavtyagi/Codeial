@@ -7,16 +7,34 @@ const User = require('../models/users');
 // first basic response for '/users/profile' request.
 module.exports.profile = function(req, res){
     // res.end('<h1> User Profile </h1>');
-    return res.render('users_profile',{
-        title: "Codeial profiles",
-        name: "User ka naam"
+
+    // return res.render('users_profile',{
+    //     title: "Codeial profiles",
+    // });
+
+    User.findById(req.params.id, function(err, user){
+        return res.render('users_profile',{
+            title: "Codeial profiles",
+            profile_user: user
+        });
     });
+    
 };
 
 // module.exports.profile2 = function(req, res){
 //     res.end('<h1> User Profile -2 </h1>');
 // };
 
+
+module.exports.update = function(req, res){
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+            return res.redirect('back');
+        });
+    }else{
+        return res.status(401).send('Unauthorised');
+    }
+}
 
 // render the sign up page
 module.exports.signUp = function(req, res){

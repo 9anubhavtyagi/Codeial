@@ -14,7 +14,17 @@ const userController = require('../controllers/users_controller');
 
 
 // serving response for '/users/profile' with the help of users_controller.
-router.get('/profile', passport.checkAuthentication, userController.profile);
+// router.get('/profile', passport.checkAuthentication, userController.profile);
+
+
+
+// serving response for '/users/profile/someid' with the help of users_controller.
+router.get('/profile/:id', passport.checkAuthentication, userController.profile);
+
+
+// serving response for '/users/updatee/someid' with the help of users_controller.
+router.post('/update/:id', passport.checkAuthentication, userController.update);
+
 
 // router.get('/profile2', userController.profile2);
 
