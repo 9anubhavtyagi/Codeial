@@ -17,11 +17,12 @@ module.exports.create = async function(req, res){
             post.comments.push(comment);
             post.save(); // before this comment are in RAM, after that they will be saved in DB.
             
+            req.flash('success', 'Your Comment has been Published!');
             res.redirect('/');
         }
 
     } catch(err){
-        console.log("Error", err);
+        req.flash('error', err);
         return;
     }
 }
@@ -38,13 +39,15 @@ module.exports.destroy = async function(req, res){
 
             // deleting the reference of deleted comment from post's comments array.
             let post = Post.findByIdAndUpdate(postId, { $pull: {comments: req.params.id}});
+
+            req.flash('success', 'Your Comment has been Deleted!');
             return res.redirect('back');
 
         } else{
             return res.redirect('back');
         }
     } catch(err){
-        console.log("Error", err);
+        req.flash('error', err);
         return;
     }
 }

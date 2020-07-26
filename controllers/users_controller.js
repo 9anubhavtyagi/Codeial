@@ -47,34 +47,34 @@ module.exports.signIn = function(req, res){
 
 // get the sign up data
 module.exports.create = function(req, res){
-
     // password and confirm_passwrord don't match
     if(req.body.password != req.body.confirm_password){
-        console.log("Password and confirm password not match");
+        req.flash('success', 'Password don\'t match. Try Again!');
         return res.redirect('back');
     }
 
     User.findOne({email: req.body.email}, function(err, user){
         if(err){
-            console.log('Error in finding user during sign-up');
-            return;
+            req.flash('error', err);
+            return res.redirect('back');
         }
 
         // if user first time creating its account
         if(!user){
             User.create(req.body, function(err, user){
                 if(err){
-                    console.log('Error in finding user during sign-up');
-                    return;
+                    req.flash('error', err);
+                    return res.redirect('back');
                 }
-                console.log("User account is created")
+
+                req.flash('success', 'Welcome to Codeial!!!. Your account has been created');
                 return res.redirect('/users/sign-in');
             });
         }
 
         // if user already had an account
         else{
-            console.log("User already had an account")
+            req.flash('success', 'This E-mail you used had already an account.');
             return res.redirect('back');
         }
     });
@@ -83,12 +83,13 @@ module.exports.create = function(req, res){
 
 // get the sign in data and create a session for user
 module.exports.createSession = function(req, res){
+    req.flash('success', 'Logged In Successfully!!!');
     return res.redirect('/');
 };
 
 
 module.exports.destroySession = function(req, res){
     req.logout();
-
+    req.flash('success', 'You have Logged Out!!!');
     return res.redirect('/');
 }
