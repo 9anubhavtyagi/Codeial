@@ -1,4 +1,6 @@
 const User = require('../models/users');
+const fs = require('fs');
+const path = require('path');
 
 
 module.exports.profile = function(req, res){
@@ -25,13 +27,23 @@ module.exports.update = async function(req, res){
                     user.email = req.body.email;
 
                     if (req.file){
+
+                        try{
+                            fs.unlinkSync(path.join(__dirname, '../', user.avatar));
+                        }
+                        catch(error){
+                            console.log("User had no associated avatar");
+                        };
+
+
+
                         // saving the path of uploaded file into avatar field in the user
                         user.avatar = User.avatarPath + '/' + req.file.filename;
                     }
 
                     user.save();
 
-                    req.flash('success', 'Updated!');
+                    req.flash('success', 'Profile Updated!');
                     return res.redirect('back');
                 
                 });
