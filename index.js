@@ -6,9 +6,12 @@ const expressLayouts = require('express-ejs-layouts'); // used for layouts
 const db = require('./config/mongoose');
 
 const session = require('express-session'); // used for session cookie.
+
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy'); // importing local Strategy
 const passportJWT = require('./config/passport-jwt-strategy'); // importing jwt Strategy
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
+
 const MongoStore = require('connect-mongo')(session);
 const sassMiddleware = require('node-sass-middleware');
 
