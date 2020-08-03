@@ -1,5 +1,6 @@
 const Comment = require('../models/comment');
 const Post = require('../models/post');
+const commentsMailer = require('../mailers/comments_mailer');
 
 
 module.exports.create = async function(req, res){
@@ -16,10 +17,10 @@ module.exports.create = async function(req, res){
             post.comments.push(comment);
             post.save(); // before this comment are in RAM, after that they will be saved in DB.
             
-            if(req.xhr){
-                // Similar for comments to fetch the user's id.
-                comment = await comment.populate('user', 'name').execPopulate();
+            comment = await comment.populate('user', 'name email').execPopulate();
+            commentsMailer.newComment(comment);
 
+            if(req.xhr){
                 return res.status(200).json({
                     data:{
                         comment: comment
