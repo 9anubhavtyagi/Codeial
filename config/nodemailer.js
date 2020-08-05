@@ -1,13 +1,12 @@
-const nodemailer = require('nodemailer');
+const nodemailer = require("nodemailer");
 const ejs = require('ejs');
-const path = require('path');
-
+const path = require('path')
 
 
 let transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
-    port: 587, // using TLS
+    port: 587, // as we are using TLS
     secure: false,
     auth: {
         user: 'anubhavtyagi00024@gmail.com',
@@ -22,11 +21,11 @@ let renderTemplate = (data, relativePath) => {
         path.join(__dirname, '../views/mailers', relativePath),
         data,
         function(err, template){
-            if(err){console.log('error in rendering template'); return;}
-
-            mailHTML = template;
+         if (err){console.log('error in rendering template', err); return}
+         
+         mailHTML = template;
         }
-    );
+    )
 
     return mailHTML;
 }
